@@ -6,28 +6,33 @@ module Jekyll
     safe true
 
     def generate(site)
-      unless site.config.dig("cecs", "revealify")
+=begin
+      unless site.config.dig("revealify")
         return
       end
+=end
 
       root = Pathname.new(Bundler.rubygems.find_name('jekyll-revealify-plugin').first.full_gem_path)
 
       #
       # 1. Get static reveal.js assets into Jekyll
       #
-      files = Dir[File.join(root.to_s, "/reveal.js/**/*.*")]
+      folders = ["reveal.js", "reveal.js-plugins"]
+      folders.each do |folder|
+        files = Dir[File.join(root.to_s, "/#{folder}/**/*.*")]
 
-      files = files.map do |f|
-        abs = Pathname.new(File.expand_path(f))
+        files = files.map do |f|
+          abs = Pathname.new(File.expand_path(f))
 
-        abs.relative_path_from(root.join("reveal.js")).to_s
+          abs.relative_path_from(root.join("#{folder}")).to_s
+        end
+
+        files = files.map do |f|
+          StaticFile.new(site, root.to_s, "#{folder}", f)
+        end
+
+        site.static_files.concat(files)
       end
-
-      files = files.map do |f|
-        StaticFile.new(site, root.to_s, "reveal.js", f)
-      end
-
-      site.static_files.concat(files)
 
       #
       # 2. Get the revealify layout into Jekyll
