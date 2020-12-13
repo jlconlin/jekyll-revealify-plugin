@@ -1,0 +1,21 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% link reveal.js/css/reveal.css %}">
+    <link rel="stylesheet" type="text/css" href="{% link {{ site.cecs.revealify.theme }} %}">
+  </head>
+  <body>
+    {{ content | revealify }}
+
+    <script src="{% link reveal.js/js/reveal.js %}"></script>
+    <script>
+// this is the reveal config
+Reveal.initialize(
+  {% include revealjs-config.js %}
+);
+    </script>
+  </body>
+</html>
