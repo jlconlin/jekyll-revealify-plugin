@@ -12,6 +12,10 @@ It does two main things:
    different stylings or features you can create them manually (and use the
    `revealify` Jekyll filter).
 
+You can install it by adding `gem "jekyll-revealify-plugin", :git =>
+"https://gitlab.cecs.anu.edu.au/lucy/jekyll-revealify-plugin.git", :branch =>
+'master'` to the `jekyll_plugins` group in your Gemfile.
+
 ## Using the plugin
 
 The [built in layout](_layouts/reveal.html) is automatically added to your site
