@@ -28,6 +28,6 @@ in your `_config.yml` file. It should be set to a path to a theme CSS file, if
 you were using the default "white" theme it would be
 "reveal.js/css/theme/white.css".
 
-To specify a configuration for Reveal itself, add a `revealjs-config.js`
-include to your site. This file should be in the format of a JavaScript object
-which can be directly pasted into the `Reveal.initialize` function call.
+To specify the reveal.js configuration, add a `revealjs-config.js` include to
+your site. This file should be in the format of a JavaScript object which can be
+directly pasted into the `Reveal.initialize` function call.
