@@ -1,7 +1,7 @@
 # jekyll-revealify-plugin
 
-`jekyll-revealify-plugin` provides an opinionated way to get Reveal slides
-working in Jekyll.
+`jekyll-revealify-plugin` provides an opinionated way to get
+[reveal.js](https://github.com/hakimel/reveal.js/) slides working in Jekyll.
 
 It does two main things:
 
