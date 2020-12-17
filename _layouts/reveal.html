@@ -1,11 +1,21 @@
 ---
 ---
 
+{% assign theme = "reveal.js/css/theme/white.css" %}
+
+{% if site.revealify.theme %}
+  {% assign theme = site.revealify.theme %}
+{% endif %}
+
+{% if page.revealify.theme %}
+  {% assign theme = page.revealify.theme %}
+{% endif %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="{% link reveal.js/css/reveal.css %}">
-    <link rel="stylesheet" type="text/css" href="{% link {{ site.cecs.revealify.theme }} %}">
+    <link rel="stylesheet" type="text/css" href="{% link {{ theme }} %}">
   </head>
   <body>
     {{ content | revealify }}

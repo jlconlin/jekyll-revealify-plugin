@@ -6,12 +6,6 @@ module Jekyll
     safe true
 
     def generate(site)
-=begin
-      unless site.config.dig("revealify")
-        return
-      end
-=end
-
       root = Pathname.new(Bundler.rubygems.find_name('jekyll-revealify-plugin').first.full_gem_path)
 
       #

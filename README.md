@@ -23,9 +23,13 @@ when you include this plugin. You can choose to either use it, or construct
 your own layout page (in this case, create a new Jekyll layout as normal using
 ours as an example).
 
-You can specify the theme file to use by setting the `site.revealify.theme` key
-in your `_config.yml` file. It should be set to a path to a theme CSS file, if
-you were using the default "white" theme it would be
+There are two ways to specify a theme to be used by the default theme:
+
+1. you can set a theme globally via the `site.revealify.theme` key in your `_config.yml` file
+2. or you can set a "revealify.theme" variable in an individual pages front matter
+
+The value in this key should be a path to a theme CSS file. For example, if you
+were using the default "white" theme it would be
 "reveal.js/css/theme/white.css".
 
 To specify the reveal.js [configuration](https://revealjs.com/config/), add a
