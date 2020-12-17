@@ -11,4 +11,5 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/*.rb']
 
   spec.add_runtime_dependency "jekyll"
+  spec.add_runtime_dependency "nokogiri"
 end
