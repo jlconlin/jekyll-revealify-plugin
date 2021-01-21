@@ -7,6 +7,10 @@
   {% assign theme = site.revealify.theme %}
 {% endif %}
 
+{% if layout.revealify.theme %}
+  {% assign theme = layout.revealify.theme %}
+{% endif %}
+
 {% if page.revealify.theme %}
   {% assign theme = page.revealify.theme %}
 {% endif %}
