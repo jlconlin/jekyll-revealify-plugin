@@ -11,7 +11,7 @@ module Jekyll
       #
       # 1. Get static reveal.js assets into Jekyll
       #
-      folders = ["reveal.js", "reveal.js-plugins"]
+      folders = ["reveal.js", "reveal.js-plugins", "chalkboard-redux"]
       folders.each do |folder|
         files = Dir[File.join(root.to_s, "/#{folder}/**/*.*")]
 

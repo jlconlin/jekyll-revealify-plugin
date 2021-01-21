@@ -1,7 +1,7 @@
 ---
 ---
 
-{% assign theme = "reveal.js/css/theme/white.css" %}
+{% assign theme = "reveal.js/theme/white.css" %}
 
 {% if site.revealify.theme %}
   {% assign theme = site.revealify.theme %}
@@ -16,17 +16,21 @@
   <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" type="text/css" href="{% link reveal.js/css/reveal.css %}">
+    <link rel="stylesheet" type="text/css" href="{% link reveal.js/reveal.css %}">
     <link rel="stylesheet" type="text/css" href="{% link {{ theme }} %}">
   </head>
   <body>
     {{ content | revealify }}
 
-    <script src="{% link reveal.js/js/reveal.js %}"></script>
+    {% for plugin in layout.plugins %}
+    <script src="{% link {{ plugin }} %}"></script>
+    {% endfor %}
+
+    <script src="{% link reveal.js/reveal.js %}"></script>
     <script>
 // this is the reveal config
 Reveal.initialize(
-  {% include revealjs-config.js %}
+  {{ layout.config }}
 );
     </script>
   </body>
