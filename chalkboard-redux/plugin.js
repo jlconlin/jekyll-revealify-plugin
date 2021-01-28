@@ -56,7 +56,7 @@ window.ChalkboardRedux = function() {
 		let draw = false;
 		let on = false;
 		let pos = {};
-		let colour = '#000000';
+		let colour = defaultPen;
 
 		canvas.addEventListener('mousedown', (event) => {
 			draw = true;
