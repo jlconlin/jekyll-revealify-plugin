@@ -4,7 +4,7 @@
 
 const selectorTempl = `
 <style>
-#selector {
+.selector {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -16,7 +16,7 @@ const selectorTempl = `
 }
 </style>
 
-<div id="selector">
+<div class="selector">
 <label for="black">Black</label>
 <input type="radio" name="pen" id="black" value="black">
 <label for="black">Red</label>
@@ -29,13 +29,16 @@ const selectorTempl = `
 `;
 
 window.ChalkboardRedux = function() {
-	// returns a board that is visible but not-interactable
 	function getBoard(width, height, toggleVisibility) {
 		const container = document.createElement('div');
 
 		container.classList.add('overlay');
 		container.style.background = 'none';
 		container.style.pointerEvents = 'none';
+
+		let toolbar = document.createElement('div');
+		toolbar.style.visibility = 'hidden';
+		toolbar.innerHTML = selectorTempl;
 
 		const canvas = document.createElement('canvas');
 		canvas.width = width;
@@ -71,20 +74,36 @@ window.ChalkboardRedux = function() {
 				y: event.clientY,
 			};
 
-			graphics.beginPath();
-			graphics.lineWidth = 5;
-			graphics.lineCap = 'round';
-			graphics.strokeStyle = colour;
+			if (colour == 'erase') {
+				let eraserSize = 40;
 
-			graphics.moveTo(pos.x, pos.y);
-			graphics.lineTo(next.x, next.y);
+				graphics.clearRect(
+					next.x-eraserSize/2,
+					next.y-eraserSize/2,
+					eraserSize,
+					eraserSize
+				);
+			} else {
+				graphics.beginPath();
+				graphics.lineWidth = 5;
+				graphics.lineCap = 'round';
+				graphics.strokeStyle = colour;
 
-			graphics.stroke();
+				graphics.moveTo(pos.x, pos.y);
+				graphics.lineTo(next.x, next.y);
+
+				graphics.stroke();
+			}
 
 			pos = next;
 		});
 
+		toolbar.addEventListener('change', (e) => {
+			colour = e.target.value;
+		});
+
 		container.appendChild(canvas);
+		container.appendChild(toolbar);
 
 		function hide() {
 			container.style.visibility = 'hidden';
@@ -97,18 +116,22 @@ window.ChalkboardRedux = function() {
 		return {
 			container,
 			graphics,
+			toolbar,
 
 			hide,
 			show,
 
-			isOn: () => on,
-			setOn: (to) => {
+			isEditable: () => on,
+
+			setEditable: (to) => {
 				on = to;
 
 				if (to) {
 					container.style.pointerEvents = 'auto';
+					toolbar.style.visibility = 'visible';
 				} else {
 					container.style.pointerEvents = 'none';
+					toolbar.style.visibility = 'hidden';
 				}
 			},
 
@@ -124,9 +147,6 @@ window.ChalkboardRedux = function() {
 		id: 'ChalkboardRedux',
 		init: (deck) => {
 			let revealElement = deck.getRevealElement();
-			let toolbar = document.createElement('div');
-			toolbar.style.visibility = 'hidden';
-			toolbar.innerHTML = selectorTempl;
 
 			let { width, height } = deck.getComputedSlideSize();
 
@@ -138,46 +158,33 @@ window.ChalkboardRedux = function() {
 			blackboardBoard.setColour('white');
 			blackboardBoard.hide();
 
-			// toggle notes on pressing 'b'
+			revealElement.appendChild(blackboardBoard.container);
+
 			deck.addKeyBinding(66, () => {
-				if (blackboardBoard.isOn()) {
+				if (blackboardBoard.isEditable()) {
 					return;
 				}
 
-				let to = !notesBoard.isOn();
-
-				if (to) {
-					toolbar.style.visibility = 'visible';
-				} else {
-					toolbar.style.visibility = 'hidden';
-				}
-
-				notesBoard.setOn(!notesBoard.isOn());
+				notesBoard.setEditable(!notesBoard.isEditable());
 			});
 
 			// toggle chalkboard on pressing 'c'
 			deck.addKeyBinding(67, () => {
-				let to = !blackboardBoard.isOn();
+				let to = !blackboardBoard.isEditable();
 
 				if (to) {
 					blackboardBoard.show();
-					toolbar.style.visibility = 'visible';
+					blackboardBoard.setEditable(true);
 				} else {
 					blackboardBoard.hide();
 
-					if (!notesBoard.isOn()) {
-						toolbar.style.visibility = 'hidden';
-					}
+					blackboardBoard.setEditable(false);
 				}
-
-				blackboardBoard.setOn(to);
 			});
-
-			revealElement.appendChild(blackboardBoard.container);
 
 			// clear image
 			deck.addKeyBinding(46, () => {
-				if (blackboardBoard.isOn()) {
+				if (blackboardBoard.isEditable()) {
 					blackboardBoard.clear();
 
 					return;
@@ -185,8 +192,6 @@ window.ChalkboardRedux = function() {
 
 				notesBoard.clear();
 			});
-
-			revealElement.appendChild(toolbar);
 		},
 	};
 };
