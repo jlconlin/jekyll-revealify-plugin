@@ -2,10 +2,10 @@
 // chalkboard-redux: chalkboard, but better.
 //
 
-const selectorTempl = (defaultPen) => {
+const toolbarTempl = (defaultPen) => {
 	let out = `
 <style>
-.selector {
+.toolbar {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -22,18 +22,18 @@ const selectorTempl = (defaultPen) => {
 	let penForm = pens.map(name => {
 		let selected = name === defaultPen ? "checked" : "";
 
-		return `<label for="${name}-${selectorCount}">${name}</label> \n` +
-			`<input type="radio" name="pen-${selectorCount}" id="${name}-${selectorCount}" value="${name}" ${selected}>`;
+		return `<label for="${name}-${toolbarCount}">${name}</label> \n` +
+			`<input type="radio" name="pen-${toolbarCount}" id="${name}-${toolbarCount}" value="${name}" ${selected}>`;
 	}).join('\n');
 
-	out += `<div class="selector"` + penForm + `</div>`;
+	out += `<div class="toolbar"` + penForm + `</div>`;
 
-	selectorCount += 1;
+	toolbarCount += 1;
 
 	return out;
 };
 
-let selectorCount = 0;
+let toolbarCount = 0;
 
 window.ChalkboardRedux = function() {
 	function getBoard(width, height, defaultPen) {
@@ -45,7 +45,7 @@ window.ChalkboardRedux = function() {
 
 		let toolbar = document.createElement('div');
 		toolbar.style.visibility = 'hidden';
-		toolbar.innerHTML = selectorTempl(defaultPen);
+		toolbar.innerHTML = toolbarTempl(defaultPen);
 
 		const canvas = document.createElement('canvas');
 		canvas.width = width;
@@ -155,46 +155,46 @@ window.ChalkboardRedux = function() {
 
 			let { width, height } = deck.getComputedSlideSize();
 
-			let notesBoard = getBoard(width, height, 'black');
-			revealElement.appendChild(notesBoard.container);
+			let notes = getBoard(width, height, 'black');
+			revealElement.appendChild(notes.container);
 
-			let blackboardBoard = getBoard(width, height, 'white');
-			blackboardBoard.container.style.background = 'black';
-			blackboardBoard.hide();
+			let chalkboard = getBoard(width, height, 'white');
+			chalkboard.container.style.background = 'black';
+			chalkboard.hide();
 
-			revealElement.appendChild(blackboardBoard.container);
+			revealElement.appendChild(chalkboard.container);
 
 			deck.addKeyBinding(66, () => {
-				if (blackboardBoard.isEditable()) {
+				if (chalkboard.isEditable()) {
 					return;
 				}
 
-				notesBoard.setEditable(!notesBoard.isEditable());
+				notes.setEditable(!notes.isEditable());
 			});
 
 			// toggle chalkboard on pressing 'c'
 			deck.addKeyBinding(67, () => {
-				let to = !blackboardBoard.isEditable();
+				let to = !chalkboard.isEditable();
 
 				if (to) {
-					blackboardBoard.show();
-					blackboardBoard.setEditable(true);
+					chalkboard.show();
+					chalkboard.setEditable(true);
 				} else {
-					blackboardBoard.hide();
+					chalkboard.hide();
 
-					blackboardBoard.setEditable(false);
+					chalkboard.setEditable(false);
 				}
 			});
 
 			// clear image
 			deck.addKeyBinding(46, () => {
-				if (blackboardBoard.isEditable()) {
-					blackboardBoard.clear();
+				if (chalkboard.isEditable()) {
+					chalkboard.clear();
 
 					return;
 				}
 
-				notesBoard.clear();
+				notes.clear();
 			});
 		},
 	};
