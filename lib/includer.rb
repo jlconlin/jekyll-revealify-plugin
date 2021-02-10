@@ -31,7 +31,8 @@ module Jekyll
       #
       # 2. Get the revealify layout into Jekyll
       #
-      # We're doing some pretty heinous hacks here to try and get what we want here.
+      # We're doing some pretty heinous hacks here to try and get what we want
+      # here.
       #
       # The problem: Jekyll's Layout class expects layouts are either in the
       # theme directory, or in the source directory (notable different to the
