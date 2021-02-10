@@ -1,7 +1,8 @@
 # jekyll-revealify-plugin
 
-`jekyll-revealify-plugin` provides an opinionated way to get
-[reveal.js](https://github.com/hakimel/reveal.js/) slides working in Jekyll.
+This `jekyll-revealify-plugin` provides an easy way to incorporate
+[reveal.js](https://github.com/hakimel/reveal.js/) HTML slides into your
+[Jekyll](https://jekyllrb.com) website.
 
 This repository contains a couple of things:
 
@@ -10,4 +11,4 @@ This repository contains a couple of things:
 3. chalkboard-redux, our chalkboarding plugin
 
 For docs of the former, see <https://revealjs.com>---for the latter two,
-<https://gitlab.cecs.anu.edu.au/pages/docs/gitlab-pages/docs/online-html-slides/>.
+<https://cs.anu.edu.au/pages/docs/gitlab-pages/docs/12-online-html-slides/>.
