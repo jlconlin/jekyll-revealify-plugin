@@ -64,10 +64,11 @@ module Jekyll
 
       layout.send(:process, layout.name)
 
+      layout.data = {}
+
       # because we have set the `path` variable, these parameters are never
       # actually used. why are they required? no idea.
       layout.send(:read_yaml, "doesn't matter", "either")
-      layout.data = {}
 
       site.layouts["reveal"] = layout
     end
