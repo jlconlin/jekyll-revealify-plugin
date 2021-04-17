@@ -47,8 +47,8 @@ config: |
 	<title>{{ page.title | xml_escape }}</title>
     {% endif %}
 
-    {% if page.summary %}
-	<meta name="description" content="{{ page.summary | xml_escape }}">
+    {% if page.event %}
+	<meta name="description" content="{{ page.event | xml_escape }}">
     {% endif %}
 
     {% if page.author %}
