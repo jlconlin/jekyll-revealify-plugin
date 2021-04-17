@@ -44,15 +44,15 @@ config: |
     <meta charset="utf-8">
 
     {% if page.title %}
-	<title>{{ page.title }}</title>
+	<title>{{ page.title | xml_escape }}</title>
     {% endif %}
 
     {% if page.summary %}
-	<meta name="description" content="{{ page.summary }}">
+	<meta name="description" content="{{ page.summary | xml_escape }}">
     {% endif %}
 
     {% if page.author %}
-	<meta name="author" content="{{ page.author }}">
+	<meta name="author" content="{{ page.author | xml_escape }}">
     {% endif %}
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
