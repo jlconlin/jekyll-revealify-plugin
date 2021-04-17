@@ -43,6 +43,23 @@ config: |
   <head>
     <meta charset="utf-8">
 
+    {% if page.title %}
+	<title>{{ page.title }}</title>
+    {% endif %}
+
+    {% if page.summary %}
+	<meta name="description" content="{{ page.summary }}">
+    {% endif %}
+
+    {% if page.author %}
+	<meta name="author" content="{{ page.author }}">
+    {% endif %}
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="{% link reveal.js/reveal.css %}">
     <link rel="stylesheet" type="text/css" href="{% link {{ theme }} %}">
   </head>
