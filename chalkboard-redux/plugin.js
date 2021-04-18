@@ -187,7 +187,7 @@ window.ChalkboardRedux = function() {
 			});
 
 			// clear image
-			deck.addKeyBinding(46, () => {
+			deck.addKeyBinding(8, () => {
 				if (chalkboard.isEditable()) {
 					chalkboard.clear();
 
