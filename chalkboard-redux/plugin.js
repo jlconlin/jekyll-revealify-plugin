@@ -10,7 +10,7 @@ const toolbarTempl = (defaultPen) => {
 	left: 0;
 	top: 0;
 	width: 100%;
-	font-size: 13px;
+	font-size: 18px;
 	background-color: rgba(255, 255, 255, 0.7);
 	text-align: center;
 	z-index: 1001; // reveal's .overlay has a z-index of 1000
