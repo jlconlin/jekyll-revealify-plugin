@@ -159,7 +159,7 @@ window.ChalkboardRedux = function() {
 			revealElement.appendChild(notes.container);
 
 			let chalkboard = getBoard(width, height, 'white');
-			chalkboard.container.style.background = 'black';
+		    chalkboard.container.style.background = '#262626';
 			chalkboard.hide();
 
 			revealElement.appendChild(chalkboard.container);
