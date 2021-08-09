@@ -1,7 +1,6 @@
 ---
 plugins:
   - reveal.js/plugin/math/math.js
-  - reveal.js/plugin/highlight/highlight.js
   - chalkboard-redux/plugin.js
 
 config: |
@@ -16,8 +15,7 @@ config: |
     slideNumber: true,
     plugins: [
       ChalkboardRedux,
-      RevealMath,
-      RevealHighlight
+      RevealMath
     ],
     math: {
       mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
@@ -69,7 +67,6 @@ config: |
   <body>
     {{ content | revealify }}
 
-    <link rel="stylesheet" type="text/css" href="{% link reveal.js/plugin/highlight/atom-one-dark.css %}">
     {% for plugin in layout.plugins %}
     <script src="{% link {{ plugin }} %}"></script>
     {% endfor %}
@@ -81,5 +78,19 @@ Reveal.initialize(
   {{ layout.config }}
 );
     </script>
+
+    <!-- we don't use reveal.js's highlight.js plugin because it doesn't play -->
+    <!-- nice with the "revealified" markdown-fenced-code-blocks -->
+
+    <!-- basically, this is a consequence of this whole thing being hacks-upon-hacks -->
+
+    <script src="{% link reveal.js/hljs/highlight.pack.js %}"></script>
+    <script src="{% link reveal.js/hljs/extempore.min.js %}"></script>
+    <link rel="stylesheet" href="{% link reveal.js/hljs/atom-one-dark.css %}">
+
+    <script>
+     hljs.highlightAll();
+    </script>
+
   </body>
 </html>
