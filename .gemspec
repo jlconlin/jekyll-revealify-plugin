@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-revealify-plugin"
-  spec.version       = "2.0.0.beta"
+  spec.version       = "2.1.0"
   spec.authors       = ["Ben Swift", "Harrison Shoebridge"]
   spec.email         = ["ben.swift@anu.edu.au"]
 
