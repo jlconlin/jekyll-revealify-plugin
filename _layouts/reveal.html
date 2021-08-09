@@ -1,6 +1,7 @@
 ---
 plugins:
   - reveal.js/plugin/math/math.js
+  - reveal.js/plugin/highlight/highlight.js
   - chalkboard-redux/plugin.js
 
 config: |
@@ -16,6 +17,7 @@ config: |
     plugins: [
       ChalkboardRedux,
       RevealMath,
+      RevealHighlight
     ],
     math: {
       mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
@@ -67,6 +69,7 @@ config: |
   <body>
     {{ content | revealify }}
 
+    <link rel="stylesheet" type="text/css" href="{% link reveal.js/plugin/highlight/atom-one-dark.css %}">
     {% for plugin in layout.plugins %}
     <script src="{% link {{ plugin }} %}"></script>
     {% endfor %}
